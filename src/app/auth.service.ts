@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { environment } from '../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -37,6 +38,7 @@ export class AuthService {
         })
       );
   }
+  
 
   isLoggedIn(): Observable<boolean> {
     if (isPlatformBrowser(this.platformId)) {

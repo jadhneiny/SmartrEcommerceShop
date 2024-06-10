@@ -1,11 +1,25 @@
-<form (ngSubmit)="login()">
-  <div>
-    <label for="email">Email:</label>
-    <input type="email" id="email" [(ngModel)]="email" name="email" required />
+<div class="login-container">
+  <h1 class="title">E-commerce Web-App</h1>
+  <div class="login-form">
+    <form (ngSubmit)="login()" #loginForm="ngForm">
+      <div class="form-group">
+        <label for="username">Username</label>
+        <input type="text" id="username" name="username" [(ngModel)]="username" #usernameInput="ngModel" required>
+        <div *ngIf="usernameInput.invalid && usernameInput.touched" class="error">
+          Username is required
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" [(ngModel)]="password" #passwordInput="ngModel" required>
+        <div *ngIf="passwordInput.invalid && passwordInput.touched" class="error">
+          Password is required
+        </div>
+      </div>
+      <div *ngIf="loginError" class="error">
+        Login failed. Please check your credentials.
+      </div>
+      <button type="submit" class="btn" [disabled]="!loginForm.valid">Login</button>
+    </form>
   </div>
-  <div>
-    <label for="password">Password:</label>
-    <input type="password" id="password" [(ngModel)]="password" name="password" required />
-  </div>
-  <button type="submit">Login</button>
-</form>
+</div>
