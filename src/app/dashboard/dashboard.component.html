@@ -1,159 +1,158 @@
-<h1>Dashboard for Tenant {{ tenantId }}</h1>
-
-<!-- Logout Button -->
-<button (click)="logout()">Logout</button>
-
+<div class="navcontainer" [ngClass]="{'navclose': isNavClosed}">
+  <!-- Navigation content -->
+</div>
 <div class="main-container">
-  <div class="navcontainer" [ngClass]="{'navclose': isNavClosed}">
-    <nav class="nav">
-      <div class="nav-upper-options">
-        <div class="nav-option option1">
-          <img src="path-to-dashboard-icon" class="nav-img" alt="dashboard">
-          <h3>Dashboard</h3>
-        </div>
-        <!-- Add other nav options similarly -->
-        <div class="nav-option logout">
-          <img src="path-to-logout-icon" class="nav-img" alt="logout">
-          <h3>Logout</h3>
-        </div>
-      </div>
-    </nav>
-  </div>
-
-  <div class="main">
-    <!-- Admins Table -->
-    <h2>Admins</h2>
-    <table>
-      <thead>
+  <h1>Dashboard for Tenant {{tenantId}}</h1>
+  
+  <button (click)="logout()">Logout</button>
+  
+  <h2>Admins</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Username</th>
+        <th>Email</th>
+      </tr>
+    </thead>
+    <tbody>
+      @if (admins.length > 0) {
+        @for (admin of admins; track $index) {
+          <tr>
+            <td>{{ admin.name }}</td>
+            <td>{{ admin.username }}</td>
+            <td>{{ admin.email }}</td>
+          </tr>
+        }
+      } @else {
         <tr>
-          <th>Name</th>
-          <th>Username</th>
-          <th>Email</th>
+          <td colspan="3">No admins found.</td>
         </tr>
-      </thead>
-      <tbody *ngIf="admins.length > 0; else noAdmins">
-        <tr *ngFor="let admin of admins; trackBy: trackByAdminId">
-          <td>{{ admin.name }}</td>
-          <td>{{ admin.username }}</td>
-          <td>{{ admin.email }}</td>
-        </tr>
-      </tbody>
-    </table>
-
-    <ng-template #noAdmins>
-      <p>No admins found.</p>
-    </ng-template>
-
-    <!-- Orders Table -->
-    <h2>Orders</h2>
-    <table>
-      <thead>
+      }
+    </tbody>
+  </table>
+  
+  <h2>Orders</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Order ID</th>
+        <th>Order Date</th>
+        <th>Customer ID</th>
+        <th>Status</th>
+        <th>Promo Code</th>
+      </tr>
+    </thead>
+    <tbody>
+      @if (orders.length > 0) {
+        @for (order of orders; track order.ORDER_ID) {
+          <tr>
+            <td>{{ order.ORDER_ID }}</td>
+            <td>{{ order.ORDER_DATE }}</td>
+            <td>{{ order.CUSTOMER_ID }}</td>
+            <td>{{ order.STATUS }}</td>
+            <td>{{ order.PROMO_CODE_ID?.CODE }}</td>
+          </tr>
+        }
+      } @else {
         <tr>
-          <th>Order ID</th>
-          <th>Order Date</th>
-          <th>Customer ID</th>
-          <th>Status</th>
-          <th>Promo Code</th>
+          <td colspan="5">No orders found.</td>
         </tr>
-      </thead>
-      <tbody *ngIf="orders.length > 0; else noOrders">
-        <tr *ngFor="let order of orders; trackBy: trackByOrderId">
-          <td>{{ order.ORDER_ID }}</td>
-          <td>{{ order.ORDER_DATE }}</td>
-          <td>{{ order.CUSTOMER_ID }}</td>
-          <td>{{ order.STATUS }}</td>
-          <td>{{ order.PROMO_CODE_ID?.CODE }}</td>
-        </tr>
-      </tbody>
-    </table>
-
-    <ng-template #noOrders>
-      <p>No orders found.</p>
-    </ng-template>
-
-    <!-- Order Details Table -->
-    <h2>Order Details</h2>
-    <table>
-      <thead>
+      }
+    </tbody>
+  </table>
+  
+  <h2>Order Details</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Order Detail ID</th>
+        <th>Order ID</th>
+        <th>Product ID</th>
+        <th>Quantity</th>
+        <th>Price</th>
+      </tr>
+    </thead>
+    <tbody>
+      @if (orderDetails.length > 0) {
+        @for (orderDetail of orderDetails; track orderDetail.ORDER_DETAIL_ID) {
+          <tr>
+            <td>{{ orderDetail.ORDER_DETAIL_ID }}</td>
+            <td>{{ orderDetail.ORDER_ID }}</td>
+            <td>{{ orderDetail.PRODUCT_ID }}</td>
+            <td>{{ orderDetail.QUANTITY }}</td>
+            <td>{{ orderDetail.PRICE }}</td>
+          </tr>
+        }
+      } @else {
         <tr>
-          <th>Order Detail ID</th>
-          <th>Order ID</th>
-          <th>Product ID</th>
-          <th>Quantity</th>
-          <th>Price</th>
+          <td colspan="5">No order details found.</td>
         </tr>
-      </thead>
-      <tbody *ngIf="orderDetails.length > 0; else noOrderDetails">
-        <tr *ngFor="let orderDetail of orderDetails; trackBy: trackByOrderDetailId">
-          <td>{{ orderDetail.ORDER_DETAIL_ID }}</td>
-          <td>{{ orderDetail.ORDER_ID }}</td>
-          <td>{{ orderDetail.PRODUCT_ID }}</td>
-          <td>{{ orderDetail.QUANTITY }}</td>
-          <td>{{ orderDetail.PRICE }}</td>
-        </tr>
-      </tbody>
-    </table>
-
-    <ng-template #noOrderDetails>
-      <p>No order details found.</p>
-    </ng-template>
-
-    <!-- Products Table -->
-    <h2>Products</h2>
-    <table>
-      <thead>
+      }
+    </tbody>
+  </table>
+  
+  <h2>Products</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Product ID</th>
+        <th>Shop ID</th>
+        <th>Product Name</th>
+        <th>Price</th>
+        <th>Image</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      @if (products.length > 0) {
+        @for (product of products; track product.PRODUCT_ID) {
+          <tr>
+            <td>{{ product.PRODUCT_ID }}</td>
+            <td>{{ product.SHOP_ID }}</td>
+            <td>{{ product.PRODUCT_NAME }}</td>
+            <td>{{ product.PRICE }}</td>
+            <td><img [src]="product.IMAGE" alt="{{ product.PRODUCT_NAME }}" /></td>
+            <td>{{ product.DESCRIPTION }}</td>
+          </tr>
+        }
+      } @else {
         <tr>
-          <th>Product ID</th>
-          <th>Shop ID</th>
-          <th>Product Name</th>
-          <th>Price</th>
-          <th>Image</th>
-          <th>Description</th>
+          <td colspan="6">No products found.</td>
         </tr>
-      </thead>
-      <tbody *ngIf="products.length > 0; else noProducts">
-        <tr *ngFor="let product of products; trackBy: trackByProductId">
-          <td>{{ product.PRODUCT_ID }}</td>
-          <td>{{ product.SHOP_ID }}</td>
-          <td>{{ product.PRODUCT_NAME }}</td>
-          <td>{{ product.PRICE }}</td>
-          <td><img [src]="product.IMAGE" alt="{{ product.PRODUCT_NAME }}" /></td>
-          <td>{{ product.DESCRIPTION }}</td>
-        </tr>
-      </tbody>
-    </table>
-
-    <ng-template #noProducts>
-      <p>No products found.</p>
-    </ng-template>
-
-    <!-- Customers Table -->
-    <h2>Customers</h2>
-    <table>
-      <thead>
+      }
+    </tbody>
+  </table>
+  
+  <h2>Customers</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Customer ID</th>
+        <th>Name</th>
+        <th>Username</th>
+        <th>Email</th>
+        <th>Password</th>
+        <th>Created At</th>
+      </tr>
+    </thead>
+    <tbody>
+      @if (customers.length > 0) {
+        @for (customer of customers; track customer.CUSTOMER_ID) {
+          <tr>
+            <td>{{ customer.CUSTOMER_ID }}</td>
+            <td>{{ customer.NAME }}</td>
+            <td>{{ customer.USERNAME }}</td>
+            <td>{{ customer.EMAIL }}</td>
+            <td>{{ customer.PASSWORD }}</td>
+            <td>{{ customer.CREATED_AT }}</td>
+          </tr>
+        }
+      } @else {
         <tr>
-          <th>Customer ID</th>
-          <th>Name</th>
-          <th>Username</th>
-          <th>Email</th>
-          <th>Password</th>
-          <th>Created At</th>
+          <td colspan="6">No customers found.</td>
         </tr>
-      </thead>
-      <tbody *ngIf="customers.length > 0; else noCustomers">
-        <tr *ngFor="let customer of customers; trackBy: trackByCustomerId">
-          <td>{{ customer.CUSTOMER_ID }}</td>
-          <td>{{ customer.NAME }}</td>
-          <td>{{ customer.USERNAME }}</td>
-          <td>{{ customer.EMAIL }}</td>
-          <td>{{ customer.PASSWORD }}</td>
-          <td>{{ customer.CREATED_AT }}</td>
-        </tr>
-      </tbody>
-    </table>
-
-    <ng-template #noCustomers>
-      <p>No customers found.</p>
-    </ng-template>
-  </div>
+      }
+    </tbody>
+  </table>
 </div>

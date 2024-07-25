@@ -1,38 +1,6 @@
-/* Main container styling */
-.main-container {
-  display: flex;
-}
-
-/* Sidebar styling */
-.navcontainer {
-  width: 250px;
-  background-color: #fff;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.nav {
-  padding: 10px 0;
-}
-
-.nav-option {
-  display: flex;
-  align-items: center;
-  padding: 10px 20px;
-  cursor: pointer;
-}
-
-.nav-option img {
-  margin-right: 10px;
-}
-
-.nav-option.logout {
-  margin-top: auto;
-}
-
-/* Main content styling */
-.main {
-  flex: 1;
-  padding: 20px;
+/* General Styles */
+body {
+  font-family: Arial, sans-serif;
 }
 
 h1 {
@@ -87,4 +55,42 @@ tr:nth-child(even) {
 img {
   max-width: 100px;
   height: auto;
+}
+
+/* Navigation Styles */
+.navcontainer {
+  background-color: #f8f8f8;
+  width: 250px;
+  position: fixed;
+  height: 100%;
+  overflow: hidden;
+  transition: width 0.5s;
+}
+
+.navclose {
+  width: 60px;
+}
+
+.navcontainer ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.navcontainer ul li {
+  padding: 20px;
+  cursor: pointer;
+}
+
+.navcontainer ul li:hover {
+  background-color: #ddd;
+}
+
+.main-container {
+  margin-left: 250px;
+  padding: 20px;
+  transition: margin-left 0.5s;
+}
+
+.navclose + .main-container {
+  margin-left: 60px;
 }
