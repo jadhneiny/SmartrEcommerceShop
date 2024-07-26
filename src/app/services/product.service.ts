@@ -11,6 +11,6 @@ export class ProductService {
   constructor(private http: HttpClient) { }
 
   getProducts(tenantId: number): Observable<any[]> {
-    return this.http.get<any[]>(`${this.baseUrl}/tenant/${tenantId}`);
+    return this.http.get<any[]>(`${this.baseUrl}/${tenantId}`);
   }
 }

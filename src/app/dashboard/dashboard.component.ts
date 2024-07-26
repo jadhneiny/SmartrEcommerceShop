@@ -1,19 +1,19 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { AuthService } from '../auth.service';
 import { AdminService } from '../services/admin.service';
 import { OrderService } from '../services/order.service';
 import { OrderDetailService } from '../services/order-detail.service';
 import { ProductService } from '../services/product.service';
 import { CustomerService } from '../services/customer.service';
-import { CommonModule, NgClass } from '@angular/common';
-
+import { NgClass, NgFor, NgIf } from '@angular/common';
 
 @Component({
-  standalone: true,
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css'],
-  imports: [NgClass],
+  standalone: true,
+  imports: [NgClass, NgIf, NgFor]
 })
 export class DashboardComponent implements OnInit {
   admins: any[] = [];
@@ -22,10 +22,11 @@ export class DashboardComponent implements OnInit {
   products: any[] = [];
   customers: any[] = [];
   tenantId: number = 2; // replace with actual tenant ID as needed
-  isNavClosed: boolean = false;
+  isNavClosed: boolean = false; // Navigation state for toggle
 
   constructor(
     private authService: AuthService,
+    private router: Router,
     private adminService: AdminService,
     private orderService: OrderService,
     private orderDetailService: OrderDetailService,
@@ -107,6 +108,26 @@ export class DashboardComponent implements OnInit {
 
   logout() {
     this.authService.logout();
-    console.log('Logged out');
+    this.router.navigate(['/login']);
+  }
+
+  trackByAdminId(index: number, admin: any): number {
+    return admin.ADMIN_ID;
+  }
+
+  trackByOrderId(index: number, order: any): number {
+    return order.ORDER_ID;
+  }
+
+  trackByOrderDetailId(index: number, orderDetail: any): number {
+    return orderDetail.ORDER_DETAIL_ID;
+  }
+
+  trackByProductId(index: number, product: any): number {
+    return product.PRODUCT_ID;
+  }
+
+  trackByCustomerId(index: number, customer: any): number {
+    return customer.CUSTOMER_ID;
   }
 }

@@ -1,11 +1,12 @@
 <div class="navcontainer" [ngClass]="{'navclose': isNavClosed}">
-  <!-- Navigation content -->
+  <!-- Navigation and other components -->
 </div>
 <div class="main-container">
   <h1>Dashboard for Tenant {{tenantId}}</h1>
-  
+  <!-- Logout Button -->
   <button (click)="logout()">Logout</button>
-  
+
+  <!-- Admins Table -->
   <h2>Admins</h2>
   <table>
     <thead>
@@ -31,7 +32,8 @@
       }
     </tbody>
   </table>
-  
+
+  <!-- Orders Table -->
   <h2>Orders</h2>
   <table>
     <thead>
@@ -61,7 +63,9 @@
       }
     </tbody>
   </table>
-  
+
+  <!-- Additional Tables for Order Details, Products, Customers -->
+
   <h2>Order Details</h2>
   <table>
     <thead>
@@ -91,7 +95,7 @@
       }
     </tbody>
   </table>
-  
+
   <h2>Products</h2>
   <table>
     <thead>
@@ -123,7 +127,7 @@
       }
     </tbody>
   </table>
-  
+
   <h2>Customers</h2>
   <table>
     <thead>

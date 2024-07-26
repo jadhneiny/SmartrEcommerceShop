@@ -11,6 +11,6 @@ export class OrderDetailService {
   constructor(private http: HttpClient) { }
 
   getOrderDetails(tenantId: number): Observable<any[]> {
-    return this.http.get<any[]>(`${this.baseUrl}/tenant/${tenantId}`);
+    return this.http.get<any[]>(`${this.baseUrl}/${tenantId}`);
   }
 }
